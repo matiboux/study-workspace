@@ -18,13 +18,29 @@ $(() => {
 			]
 		})
 
-	// Restored escaped dollar signs
+	// Restore escaped dollar signs
 	$content.html($content.html().replace('\\!#36', '$'))
 
-	// -- Parse markdown syntax for subscript and superscript
+	// -- Parse additional markdown syntax outside code blocks
 
-	$content.html($content.html().replace(/(?<!\\)((?:\\\\)*)\~(.+?(?<!\\)(?:\\\\)*)\~/gi, '$1<sub>$2</sub>'))
-	$content.html($content.html().replace(/(?<!\\)((?:\\\\)*)\^(.+?(?<!\\)(?:\\\\)*)\^/gi, '$1<sup>$2</sup>'))
+	const replacePairs = [
+		// Subscript
+		[/(?<!\\)((?:\\\\)*)\~(.+?(?<!\\)(?:\\\\)*)\~/gi, '$1<sub>$2</sub>'],
+		// Superscript
+		[/(?<!\\)((?:\\\\)*)\^(.+?(?<!\\)(?:\\\\)*)\^/gi, '$1<sup>$2</sup>'],
+	]
+
+	const splitregex = /(<code>.*?<\/code>)/gis
+	$content.html(
+			$content.html().split(splitregex)
+				.map(str =>
+					{
+						if (!str) return str
+						if (str.match(splitregex)) return str
+						return replacePairs.reduce((str, replacePair) => str.replace(...replacePair), str)
+					})
+				.join('')
+		)
 
 	// -- Render Mermaid
 
