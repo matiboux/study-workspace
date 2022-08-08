@@ -1,0 +1,12 @@
+title: Study Workspace
+description: Notes in studies
+author: Matiboux
+
+exclude:
+- README.md
+
+defaults:
+  - scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"
