@@ -2,8 +2,7 @@ $(() => {
 
 	const $content = $('#main .content')
 
-	// -- Escape dollar signs
-	// -- Render math equations
+	// -- Render Katex math equations
 
 	// Save escaped dollar signs
 	$content.html($content.html().replace('\\$', '\\!#36'))
@@ -44,7 +43,7 @@ $(() => {
 				.join('')
 		)
 
-	// -- Render Mermaid
+	// -- Render Mermaid diagrams
 
 	$content.html($content.html().replace(
 		/<pre>.*?<code.+?class="language-mermaid".*?>(.+?)<\/code>.*?<\/pre>/gis,
@@ -56,7 +55,7 @@ $(() => {
 	const $breadcrumb = $('#breadcrumb')
 	const $breadcrumbList = $breadcrumb.find('ul')
 
-	// Breadcrumb
+	// Generate breadcrumb
 	const pathparts = window.location.pathname.split('/');
 	let pathurl = window.location.origin;
 	$.each(pathparts, (i, value) => {
