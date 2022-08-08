@@ -47,7 +47,7 @@ etc...
 ~Subscript~ and ^superscript^
 ```
 
-==Highlighted== text (Not supported yet)
+==Highlighted== text
 
 ```markdown
 ==Highlighted== text
