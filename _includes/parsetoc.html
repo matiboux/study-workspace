@@ -1,0 +1,17 @@
+{% if include.toc.size > 0 %}
+	<ul>
+		{% for item in include.toc %}
+			<li>
+				{% if item.anchor %}
+					<a href="#{{ item.anchor }}">{{ item.title }}</a>
+				{% elsif item.title %}
+					{{ item.title }}
+				{% endif %}
+
+				{% if item.children %}
+					{% include parsetoc.html toc = item.children %}
+				{% endif %}
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

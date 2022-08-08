@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="title" content="{{ site.title }}" />
+	{% if site.description %}
+		<meta name="description" content="{{ site.description }}" />
+	{% endif %}
+	<meta name="robots" content="noindex,nofollow" />
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" />
+	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" integrity="sha384-zTROYFVGOfTw7JV7KUu8udsvW2fx4lWOsCEDqhBreBwlHI4ioVRtmIvEThzJHGET" crossorigin="anonymous"> -->
+	<link rel="stylesheet" href="https://stackedit.mtbx.it/style.css" /> <!-- https://stackedit.io/style.css -->
+	<link rel="stylesheet" href="{{ '/assets/style.css?v=' | append: site.github.build_revision | relative_url }}" />
+
+	<title>
+		{{ site.title }}
+		{% if page.title %}– {{ page.title }}{% endif %}
+	</title>
+
+	<script defer src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+	<script defer src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js" integrity="sha384-GxNFqL3r9uRJQhR+47eDxuPoNE7yLftQM8LcxzgS4HT73tp970WS/wV5p8UzCOmb" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js" integrity="sha384-vZTG03m+2yp6N6BNi5iM4rW4oIwk5DfcNdFfxkk9ZWpDriOkXX8voJBFrAO7MpVl" crossorigin="anonymous"></script>
+	<script defer src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+	<script defer src="{{ '/assets/script.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+
+</head>
+<body class="stackedit">
+
+	<!-- <nav aria-label="breadcrumb"> -->
+		<!-- <ol id="breadcrumb" class="breadcrumb"> -->
+			<!-- <li class="breadcrumb-item"><a href="#">Home</a></li> -->
+			<!-- <li class="breadcrumb-item"><a href="#">Library</a></li> -->
+			<!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+		<!-- </ol> -->
+	<!-- </nav> -->
+
+	<nav id="breadcrumb" aria-label="breadcrumb">
+		<a class="toggle-sidebar" href="#">
+			<i class="fas fa-bars"></i>
+		</a>
+		<ul class="breadcrumb">
+			<!-- <li><a href="a">Home</a></li> -->
+			<!-- <li><a href="a">Page</a></li> -->
+			<!-- <li><a href="a">Page</a></li> -->
+		</ul>
+	</nav>
+
+	<div id="main">
+		<div class="sidebar">
+			<div class="toc stackedit__toc">
+				{% if page.toc %}
+					{% include parsetoc.html toc = page.toc %}
+				{% endif %}
+			</div>
+		</div>
+		<div class="content stackedit__html">
+			{{ content }}
+		</div>
+	</div>
+
+</body>
+</html>
