@@ -59,7 +59,13 @@
 			</div>
 		</div>
 		<div class="content stackedit__html">
-			{{ content }}
+			{% if page.secret %}
+				<h1 id="confidential-page"><i class="fas fa-lock fa-fw"></i> Confidential page</h1>
+				<p>This page is marked as confidential. You cannot access it from the web.</p>
+				<p><a href="../" class="go-back-link">← Go back</a></p>
+			{% else %}
+				{{ content }}
+			{% endif %}
 		</div>
 	</div>
 
