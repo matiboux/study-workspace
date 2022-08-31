@@ -66,7 +66,7 @@ $(() => {
 		}
 		else value = $('h1').text();
 
-		$breadcrumbList.append($('<li>').append($('<a>').attr('href', pathurl).html(value ? value : 'Home')));
+		$breadcrumbList.append($('<li>').append($('<a>').attr('href', pathurl).html(value ? decodeURIComponent(value) : 'Home')));
 	});
 
 	// -- Table of contents
