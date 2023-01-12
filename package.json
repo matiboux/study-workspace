@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/matiboux/study-workspace/issues"
   },
-  "homepage": "https://github.com/matiboux/study-workspace#readme"
+  "homepage": "https://github.com/matiboux/study-workspace#readme",
+  "dependencies": {
+    "katex": "^0.16.4"
+  }
 }
