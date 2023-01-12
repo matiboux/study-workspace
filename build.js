@@ -83,5 +83,5 @@ files.forEach(async file =>
 		content = content.replace(/&!#61;/gs, '=')
 
 		// Update file content
-		fs.writeFile(file, content)
+		fs.writeFileSync(file, content)
 	})
