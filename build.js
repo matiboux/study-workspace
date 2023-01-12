@@ -48,9 +48,39 @@ files.forEach(file =>
 					return katex.renderToString(latex, { displayMode: false, throwOnError: false })
 				})
 
+		// Escape dollar characters in generated HTML
+		content = content.replace(/<span.*?katex.*?>.*?<\/span>/gs,
+			match => match.replace(/\$/g, '&!#36;'))
+
+		// Escape tilde characters in code blocks
+		content = content.replace(/```.+?```(?=\s|$)/gs,
+			match => match.replace(/~/g, '&!#126;'))
+		content = content.replace(/(?<!`)`(?!`)[^\n]+?(?<!`)`(?!`)/gm,
+			match => match.replace(/~/g, '&!#126;'))
+
+		// Escape circumflex characters in code blocks
+		content = content.replace(/```.+?```(?=\s|$)/gs,
+			match => match.replace(/\^/g, '&!#93;'))
+		content = content.replace(/(?<!`)`(?!`)[^\n]+?(?<!`)`(?!`)/gm,
+			match => match.replace(/\^/g, '&!#93;'))
+
+		// Escape equal characters in code blocks
+		content = content.replace(/```.+?```(?=\s|$)/gs,
+			match => match.replace(/=/g, '&!#61;'))
+		content = content.replace(/(?<!`)`(?!`)[^\n]+?(?<!`)`(?!`)/gm,
+			match => match.replace(/=/g, '&!#61;'))
+
+		content = content.replace(/~([^\n]+?)~/gm, '<sub>$1</sub>')
+		content = content.replace(/~([^\n]+?)~/gm, '<sub>$1</sub>')
+		content = content.replace(/\^([^\n]+?)\^/gm, '<sup>$1</sup>')
+		content = content.replace(/==([^\n]+?)==/gm, '<mark>$1</mark>')
+
 		// Restore escaped characters
 		content = content.replace(/&!#36;/gs, '$')
 		content = content.replace(/&!#96;/gs, '`')
+		content = content.replace(/&!#126;/gs, '~')
+		content = content.replace(/&!#93;/gs, '^')
+		content = content.replace(/&!#61;/gs, '=')
 
 		fs.writeFileSync(file + '2.md', content)
 	})
