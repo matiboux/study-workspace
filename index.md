@@ -31,7 +31,7 @@ A paragraph with *italic* and **bold** text.
 A second line with _italic_ and __bold__ text.
 ```
 
-Code block with `console.log("Hello World!");`
+Inline code with `console.log("Hello World!");`
 
 ```markdown
 Code block with `console.log("Hello World!");`
