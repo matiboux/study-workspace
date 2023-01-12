@@ -1,0 +1,21 @@
+{
+  "name": "study-workspace",
+  "version": "0.0.0",
+  "description": "Workspace template for taking and saving notes in studies.",
+  "main": "build.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matiboux/study-workspace.git"
+  },
+  "author": "matiboux",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matiboux/study-workspace/issues"
+  },
+  "homepage": "https://github.com/matiboux/study-workspace#readme"
+}
