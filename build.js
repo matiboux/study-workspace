@@ -46,11 +46,11 @@ async function processFile(path)
 	// Escape dollar characters in code blocks
 	content = content.replace(/```.+?```(?=\s|$)/gs,
 		match => match.replace(/\$/g, '&!#36;'))
-	content = content.replace(/(?<!`)`(?!`).+?(?<!`)`(?!`)/gm,
+	content = content.replace(/(?<!`)`(?!`)[^\n]+?(?<!`)`(?!`)/gm,
 		match => match.replace(/\$/g, '&!#36;'))
 
 	// Render KaTeX in document
-	content = content.replace(/\$\$(.*?)\$\$/gs,
+	content = content.replace(/\$\$(?!\s)(.*?)(?<!\s)\$\$/gs,
 		(_, latex) =>
 			{
 				latex = latex
@@ -64,12 +64,12 @@ async function processFile(path)
 		match => match.replace(/\$/g, '&!#36;'))
 
 	// Render KaTeX in document
-	content = content.replace(/\$(.*?)\$/gs,
+	content = content.replace(/\$(?!\s)([^\$]*?)(?<!\s)\$/gs,
 		(_, latex) =>
 			{
 				latex = latex
-					.replaceAll('&!#36;', '\\$')
-					.replaceAll('&!#96;', '\\`')
+					.replaceAll('&!#36;', '$')
+					.replaceAll('&!#96;', '`')
 				return katex.renderToString(latex, { displayMode: false, throwOnError: false })
 			})
 
