@@ -8,7 +8,7 @@ const files = argFiles.length > 0
 	? argFiles
 	: fs.readdirSync('.').filter(file => file.endsWith('.md'))
 
-files.forEach(file =>
+files.forEach(async file =>
 	{
 		let content = fs.readFileSync(file, 'utf8')
 
@@ -83,5 +83,5 @@ files.forEach(file =>
 		content = content.replace(/&!#61;/gs, '=')
 
 		// Update file content
-		fs.writeFileSync(file, content)
+		fs.writeFile(file, content)
 	})
