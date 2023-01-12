@@ -70,7 +70,7 @@ files.forEach(file =>
 		content = content.replace(/(?<!`)`(?!`)[^\n]+?(?<!`)`(?!`)/gm,
 			match => match.replace(/=/g, '&!#61;'))
 
-		content = content.replace(/~([^\n]+?)~/gm, '<sub>$1</sub>')
+		// Parse custom markdown
 		content = content.replace(/~([^\n]+?)~/gm, '<sub>$1</sub>')
 		content = content.replace(/\^([^\n]+?)\^/gm, '<sup>$1</sup>')
 		content = content.replace(/==([^\n]+?)==/gm, '<mark>$1</mark>')
@@ -82,5 +82,6 @@ files.forEach(file =>
 		content = content.replace(/&!#93;/gs, '^')
 		content = content.replace(/&!#61;/gs, '=')
 
-		fs.writeFileSync(file + '2.md', content)
+		// Update file content
+		fs.writeFileSync(file, content)
 	})
