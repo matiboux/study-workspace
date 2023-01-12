@@ -2,47 +2,6 @@ $(() => {
 
 	const $content = $('#main .content')
 
-	// -- Render Katex math equations
-
-	// Save escaped dollar signs
-	$content.html($content.html().replace('\\$', '\\!#36'))
-
-	// Render KaTeX in document
-	renderMathInElement($content[0], {
-			delimiters: [
-				{ left: "$$", right: "$$", display: true },
-				{ left: "$", right: "$", display: false },
-				{ left: "\\(", right: "\\)", display: false },
-				{ left: "\\[", right: "\\]", display: true },
-			]
-		})
-
-	// Restore escaped dollar signs
-	$content.html($content.html().replace('\\!#36', '$'))
-
-	// -- Parse additional markdown syntax outside code blocks
-
-	const replacePairs = [
-		// Subscript
-		[/(?<!\\)((?:\\\\)*)\~(.+?(?<!\\)(?:\\\\)*)\~/gi, '$1<sub>$2</sub>'],
-		// Superscript
-		[/(?<!\\)((?:\\\\)*)\^(.+?(?<!\\)(?:\\\\)*)\^/gi, '$1<sup>$2</sup>'],
-		// Highlight
-		[/(?<!\\)((?:\\\\)*)==(.+?(?<!\\)(?:\\\\)*)==/gi, '$1<mark>$2</mark>'],
-	]
-
-	const splitregex = /(<code>.*?<\/code>)/gis
-	$content.html(
-			$content.html().split(splitregex)
-				.map(str =>
-					{
-						if (!str) return str
-						if (str.match(splitregex)) return str
-						return replacePairs.reduce((str, replacePair) => str.replace(...replacePair), str)
-					})
-				.join('')
-		)
-
 	// -- Render Mermaid diagrams
 
 	$content.html($content.html().replace(
