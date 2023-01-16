@@ -44,13 +44,13 @@ async function processFile(path)
 	content = content.replace(/\\`/gs, '\\&!#96;')
 
 	// Escape dollar characters in code blocks
-	content = content.replace(/```.+?```(?=\s|$)/gs,
+	content = content.replace(/(?<!`)```.+?```(?=\s|$)/gs,
 		match => match.replace(/\$/g, '&!#36;'))
 	content = content.replace(/(?<!`)`(?!`)[^\n]+?(?<!`)`(?!`)/gm,
 		match => match.replace(/\$/g, '&!#36;'))
 
 	// Render KaTeX in document
-	content = content.replace(/\$\$(?!\s)(.*?)(?<!\s)\$\$/gs,
+	content = content.replace(/(?<!\$)\$\$(?!\s)(.*?)(?<!\s)\$\$(?!\$)/gs,
 		(_, latex) =>
 			{
 				latex = latex
@@ -64,7 +64,7 @@ async function processFile(path)
 		match => match.replace(/\$/g, '&!#36;'))
 
 	// Render KaTeX in document
-	content = content.replace(/\$(?!\s)([^\$]*?)(?<!\s)\$/gs,
+	content = content.replace(/(?<!\$)\$(?!\s)([^\$]*?)(?<!\s)\$(?!\$)/gs,
 		(_, latex) =>
 			{
 				latex = latex
@@ -76,6 +76,18 @@ async function processFile(path)
 	// Escape dollar characters in generated HTML
 	content = content.replace(/<span.*?katex.*?>.*?<\/span>/gs,
 		match => match.replace(/\$/g, '&!#36;'))
+
+	// Save escaped space characters
+	content = content.replace(/\\ /gs, '\\&!#32;')
+
+	// Save escaped tilde characters
+	content = content.replace(/\\~/gs, '\\&!#126;')
+
+	// Save escaped circumflex characters
+	content = content.replace(/\\\^/gs, '\\&!#93;')
+
+	// Save escaped equal characters
+	content = content.replace(/\\=/gs, '\\&!#61;')
 
 	// Escape tilde characters in code blocks
 	content = content.replace(/```.+?```(?=\s|$)/gs,
@@ -96,13 +108,14 @@ async function processFile(path)
 		match => match.replace(/=/g, '&!#61;'))
 
 	// Parse custom markdown
-	content = content.replace(/~([^\n]+?)~/gm, '<sub>$1</sub>')
-	content = content.replace(/\^([^\n]+?)\^/gm, '<sup>$1</sup>')
-	content = content.replace(/==([^\n]+?)==/gm, '<mark>$1</mark>')
+	content = content.replace(/(?<!\~)\~([^~\n]+?)\~(?!\~)/gm, '<sub>$1</sub>')
+	content = content.replace(/(?<!\^)\^([^\^\n]+?)\^(?!\^)/gm, '<sup>$1</sup>')
+	content = content.replace(/(?<!=)==([^\n]+?)==(?!=)/gm, '<mark>$1</mark>')
 
 	// Restore escaped characters
 	content = content.replace(/&!#36;/gs, '$')
 	content = content.replace(/&!#96;/gs, '`')
+	content = content.replace(/&!#32;/gs, ' ')
 	content = content.replace(/&!#126;/gs, '~')
 	content = content.replace(/&!#93;/gs, '^')
 	content = content.replace(/&!#61;/gs, '=')
